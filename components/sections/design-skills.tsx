@@ -104,7 +104,6 @@ export function DesignSkillsSection() {
                       <Progress
                         value={skill.level}
                         className="h-2 bg-primary/10"
-                        indicatorClassName="bg-gradient-to-r from-primary to-primary/50"
                       />
                       <motion.div
                         initial={{ width: '0%' }}
