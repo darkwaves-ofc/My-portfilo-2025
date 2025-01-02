@@ -31,10 +31,10 @@ export function Navbar() {
 
   const navItems = [
     { href: '#home', label: 'Home' },
+    { href: '#about', label: 'About' },
     { href: '#skills', label: 'Skills' },
     { href: '#design-skills', label: 'Design' },
     { href: '#projects', label: 'Projects' },
-    { href: '#about', label: 'About' },
     { href: '#contact', label: 'Contact' },
   ];
 
