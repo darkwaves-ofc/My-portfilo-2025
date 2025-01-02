@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { skills } from '@/lib/data/skills';
 import { Button } from '@/components/ui/button';
 import { SkillCard } from './skill-card';
-import { Code, Server, Tool, Sparkles } from 'lucide-react';
+import { Code, Server, Sparkles } from 'lucide-react';
 
 const categoryIcons = {
   frontend: Code,
