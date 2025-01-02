@@ -7,13 +7,13 @@ import { Button } from '@/components/ui/button';
 import { SkillCard } from './skill-card';
 import { Code, Server, Wrench, Sparkles } from 'lucide-react'; // Changed Tool to Wrench
 
-const categoryIcons = {
-  frontend: Code,
-  backend: Server,
-  tools: Wrench, // Changed Tool to Wrench
-};
-
 export function SkillsSection() {
+  const categoryIcons = {
+    frontend: Code,
+    backend: Server,
+    tools: Wrench, // Changed Tool to Wrench
+  };
+    
   const [activeCategory, setActiveCategory] = useState<'frontend' | 'backend' | 'tools'>('frontend');
 
   const containerVariants = {

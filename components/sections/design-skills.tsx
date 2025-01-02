@@ -1,21 +1,16 @@
 "use client";
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { designSkills } from '@/lib/data/design-skills';
-import { Card } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
-import { Button } from '@/components/ui/button';
-import { Palette, Film, Layers, Sparkles } from 'lucide-react';
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { designSkills } from "@/lib/data/design-skills";
+import { Card } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+import { Button } from "@/components/ui/button";
+import { Palette, Film, Layers, Sparkles } from "lucide-react";
+type SkillsTypes = "design" | "motion" | "other";
 
-const categoryIcons = {
-  design: Palette,
-  motion: Film,
-  other: Layers,
-};
-
-export function DesignSkillsSection() {
-  const [activeCategory, setActiveCategory] = useState<'design' | 'motion' | 'other'>('design');
+export default function DesignSkillsSection() {
+  const [activeCategory, setActiveCategory] = useState<SkillsTypes>("design");
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -28,6 +23,11 @@ export function DesignSkillsSection() {
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     show: { opacity: 1, y: 0 },
+  };
+  const categoryIcons = {
+    design: Palette,
+    motion: Film,
+    other: Layers,
   };
 
   return (
@@ -55,24 +55,24 @@ export function DesignSkillsSection() {
           </div>
 
           <div className="flex flex-wrap justify-center gap-4 mb-12">
-            {(Object.keys(designSkills) as Array<keyof typeof designSkills>).map((category) => {
+            {(Object.keys(designSkills) as SkillsTypes[]).map((category) => {
               const Icon = categoryIcons[category];
               return (
                 <Button
                   key={category}
-                  variant={activeCategory === category ? 'default' : 'outline'}
+                  variant={activeCategory === category ? "default" : "outline"}
                   onClick={() => setActiveCategory(category)}
                   className={`capitalize gap-2 transition-all duration-300 ${
                     activeCategory === category
-                      ? 'bg-primary text-primary-foreground scale-105'
-                      : 'hover:scale-105'
+                      ? "bg-primary text-primary-foreground scale-105"
+                      : "hover:scale-105"
                   }`}
                 >
                   {Icon && <Icon className="w-4 h-4" />}
                   {category}
                 </Button>
               );
-            })}
+            })}{" "}
           </div>
 
           <AnimatePresence mode="wait">
@@ -84,37 +84,37 @@ export function DesignSkillsSection() {
               exit="hidden"
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             >
-              {designSkills[activeCategory].map((skill, index) => (
-                <motion.div
-                  key={skill.name}
-                  variants={itemVariants}
-                  custom={index}
-                  className="group"
-                >
-                  <Card className="p-6 backdrop-blur-sm bg-card/50 hover:bg-card/80 transition-all duration-300 border-primary/10 group-hover:shadow-lg group-hover:shadow-primary/5">
-                    <div className="relative">
-                      <div className="flex items-center justify-between mb-4">
-                        <h3 className="text-lg font-semibold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70">
-                          {skill.name}
-                        </h3>
-                        <span className="text-sm font-medium px-3 py-1 rounded-full bg-primary/10 text-primary">
-                          {skill.level}%
-                        </span>
+              {designSkills[activeCategory].length === 0 ? (
+                <p className="text-gray-500">
+                  No skills available for this category.
+                </p>
+              ) : (
+                designSkills[activeCategory].map((skill, index) => (
+                  <motion.div
+                    key={skill.name}
+                    variants={itemVariants}
+                    custom={index}
+                    className="group"
+                  >
+                    <Card className="p-6 backdrop-blur-sm bg-card/50 hover:bg-card/80 transition-all duration-300 border-primary/10 group-hover:shadow-lg group-hover:shadow-primary/5">
+                      <div className="relative">
+                        <div className="flex items-center justify-between mb-4">
+                          <h3 className="text-lg font-semibold bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70">
+                            {skill.name}
+                          </h3>
+                          <span className="text-sm font-medium px-3 py-1 rounded-full bg-primary/10 text-primary">
+                            {skill.level || 0}%
+                          </span>
+                        </div>
+                        <Progress
+                          value={skill?.level} // Ensure value is at least 0
+                          className="h-2 bg-primary/10"
+                        />
                       </div>
-                      <Progress
-                        value={skill.level}
-                        className="h-2 bg-primary/10"
-                      />
-                      <motion.div
-                        initial={{ width: '0%' }}
-                        whileHover={{ width: '100%' }}
-                        transition={{ duration: 0.3 }}
-                        className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-primary to-transparent"
-                      />
-                    </div>
-                  </Card>
-                </motion.div>
-              ))}
+                    </Card>
+                  </motion.div>
+                ))
+              )}
             </motion.div>
           </AnimatePresence>
         </motion.div>
