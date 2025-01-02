@@ -5,12 +5,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { skills } from '@/lib/data/skills';
 import { Button } from '@/components/ui/button';
 import { SkillCard } from './skill-card';
-import { Code, Server, Sparkles } from 'lucide-react';
+import { Code, Server, Wrench, Sparkles } from 'lucide-react'; // Changed Tool to Wrench
 
 const categoryIcons = {
   frontend: Code,
   backend: Server,
-  tools: Tool,
+  tools: Wrench, // Changed Tool to Wrench
 };
 
 export function SkillsSection() {
