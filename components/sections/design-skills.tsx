@@ -21,13 +21,13 @@ export function DesignSkillsSection() {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
-      transition: { staggerChildren: 0.1 }
-    }
+      transition: { staggerChildren: 0.1 },
+    },
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0 }
+    show: { opacity: 1, y: 0 },
   };
 
   return (
@@ -53,22 +53,22 @@ export function DesignSkillsSection() {
               Design Expertise
             </h2>
           </div>
-          
+
           <div className="flex flex-wrap justify-center gap-4 mb-12">
             {(Object.keys(designSkills) as Array<keyof typeof designSkills>).map((category) => {
               const Icon = categoryIcons[category];
               return (
                 <Button
                   key={category}
-                  variant={activeCategory === category ? "default" : "outline"}
+                  variant={activeCategory === category ? 'default' : 'outline'}
                   onClick={() => setActiveCategory(category)}
                   className={`capitalize gap-2 transition-all duration-300 ${
-                    activeCategory === category 
+                    activeCategory === category
                       ? 'bg-primary text-primary-foreground scale-105'
                       : 'hover:scale-105'
                   }`}
                 >
-                  <Icon className="w-4 h-4" />
+                  {Icon && <Icon className="w-4 h-4" />}
                   {category}
                 </Button>
               );
@@ -101,14 +101,14 @@ export function DesignSkillsSection() {
                           {skill.level}%
                         </span>
                       </div>
-                      <Progress 
-                        value={skill.level} 
+                      <Progress
+                        value={skill.level}
                         className="h-2 bg-primary/10"
                         indicatorClassName="bg-gradient-to-r from-primary to-primary/50"
                       />
                       <motion.div
-                        initial={{ width: "0%" }}
-                        whileHover={{ width: "100%" }}
+                        initial={{ width: '0%' }}
+                        whileHover={{ width: '100%' }}
                         transition={{ duration: 0.3 }}
                         className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-primary to-transparent"
                       />
